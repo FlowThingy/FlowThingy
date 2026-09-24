@@ -146,11 +146,6 @@ Things I've actually used across these projects:
 
 <div align="center">
 
-<!-- GitHub Stats — greptile-stats, no token needed -->
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=FlowThingy&theme=tokyonight" alt="GitHub Stats" />
-
-</div>
-
 <div align="center">
 
 <!-- GitHub Streak Stats -->
