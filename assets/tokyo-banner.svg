@@ -1,534 +1,399 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 220" width="860" height="220">
+<svg id="megacity-svg" viewBox="0 0 860 220" width="860" height="220" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+
   <defs>
     <style>
-      @keyframes blink  { 0%,49%{opacity:1} 50%,100%{opacity:0.2} }
-      @keyframes blink2 { 0%,39%{opacity:0.3} 40%,79%{opacity:1} 80%,100%{opacity:0.3} }
-      @keyframes blink3 { 0%,65%{opacity:1} 66%,89%{opacity:0.1} 90%,100%{opacity:1} }
-      @keyframes glow   { 0%,100%{opacity:0.7} 50%{opacity:1} }
-      @keyframes glow2  { 0%,100%{opacity:0.5} 50%{opacity:0.9} }
-      @keyframes rain   { 0%{transform:translateY(-20px)} 100%{transform:translateY(220px)} }
-      @keyframes rain2  { 0%{transform:translateY(-20px)} 100%{transform:translateY(220px)} }
-      @keyframes rain3  { 0%{transform:translateY(-20px)} 100%{transform:translateY(220px)} }
-      .b1{animation:blink  2.3s infinite}
-      .b2{animation:blink2 3.1s infinite}
-      .b3{animation:blink3 1.8s infinite}
-      .g1{animation:glow   2s   infinite}
-      .g2{animation:glow2  2.7s infinite}
-      .r1{animation:rain   1.2s linear infinite}
-      .r2{animation:rain2  1.8s linear infinite}
-      .r3{animation:rain3  2.4s linear infinite}
+      /* ── Strobes ── */
+      @keyframes strobe1 { 0%,49%{fill:#ff0055;opacity:1} 50%,100%{fill:#ff0055;opacity:0.05} }
+      @keyframes strobe2 { 0%,39%{fill:#00f3ff;opacity:0.1} 40%,79%{fill:#00f3ff;opacity:1} 80%,100%{fill:#00f3ff;opacity:0.1} }
+      .anim-strobe-1 { animation: strobe1 1.1s infinite }
+      .anim-strobe-2 { animation: strobe2 1.7s infinite }
+
+      /* ── Sign flicker ── */
+      @keyframes flickerA { 0%,92%{opacity:1} 93%,95%{opacity:0.05} 96%,100%{opacity:1} }
+      @keyframes flickerB { 0%,80%{opacity:1} 81%,84%{opacity:0.05} 85%,100%{opacity:1} }
+      .anim-flicker-a { animation: flickerA 3.2s infinite }
+      .anim-flicker-b { animation: flickerB 2.6s infinite }
+
+      /* ── Pearl pulse ── */
+      @keyframes pearl { 0%,100%{opacity:0.85;r:14} 50%{opacity:1;r:16} }
+      .anim-pearl { animation: pearl 2s infinite }
+
+      /* ── Dragon shimmer ── */
+      @keyframes dragon { 0%,100%{opacity:1;transform:translateX(0)} 50%{opacity:0.6;transform:translateX(2px)} }
+      .anim-dragon { animation: dragon 3s infinite }
+
+      /* ── Lotus spin ── */
+      @keyframes lotus { from{transform:translate(657px,68px) rotate(0deg)} to{transform:translate(657px,68px) rotate(360deg)} }
+      .anim-lotus { animation: lotus 8s linear infinite; transform-origin: 657px 68px }
+
+      /* ── Monorail ── */
+      @keyframes monorail { from{transform:translateX(-130px)} to{transform:translateX(900px)} }
+      .anim-monorail { animation: monorail 8s linear infinite }
+
+      /* ── Shuttle ── */
+      @keyframes shuttle { from{transform:translateX(920px)} to{transform:translateX(-60px)} }
+      .anim-shuttle { animation: shuttle 12s linear infinite }
+
+      /* ── Cars ── */
+      @keyframes carEast { from{transform:translateX(-80px)} to{transform:translateX(920px)} }
+      @keyframes carWest { from{transform:translateX(920px)} to{transform:translateX(-80px)} }
+      @keyframes bike    { from{transform:translateX(-60px)} to{transform:translateX(920px)} }
+      .anim-car-east { animation: carEast 9s linear infinite }
+      .anim-car-west { animation: carWest 13s linear infinite }
+      .anim-bike     { animation: bike 5s linear infinite }
+
+      /* ── Drone ── */
+      @keyframes drone { 0%{transform:translateX(0)} 50%{transform:translateX(380px)} 100%{transform:translateX(0)} }
+      .anim-drone { animation: drone 18s ease-in-out infinite }
+
+      /* ── Searchlight swing ── */
+      @keyframes searchlight { 0%,100%{transform:rotate(-18deg)} 50%{transform:rotate(18deg)} }
+      .anim-searchlight { animation: searchlight 3s ease-in-out infinite; transform-origin: 19px 7px }
+
+      /* ── Rain ── */
+      @keyframes rain { from{transform:translateY(-220px)} to{transform:translateY(220px)} }
+      .anim-rain { animation: rain 1.4s linear infinite }
+
+      /* ── Steam ── */
+      @keyframes steam { 0%{transform:translateY(0);opacity:0.7} 100%{transform:translateY(-30px);opacity:0} }
+      .anim-steam { animation: steam 2.2s ease-out infinite }
+
+      /* ── Ripple ── */
+      @keyframes ripple { 0%{rx:2;ry:1;opacity:0.8} 100%{rx:14;ry:5;opacity:0} }
+      .anim-ripple { animation: ripple 1.8s ease-out infinite }
     </style>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#06001a"/>
-      <stop offset="55%"  stop-color="#0a0a2a"/>
-      <stop offset="100%" stop-color="#12082e"/>
+
+    <filter id="glow-pink" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-cyan" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-gold" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <linearGradient id="sky-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#020006"/>
+      <stop offset="30%"  stop-color="#0b031a"/>
+      <stop offset="65%"  stop-color="#240733"/>
+      <stop offset="100%" stop-color="#470744"/>
     </linearGradient>
-    <linearGradient id="street" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#0e0a22"/>
-      <stop offset="100%" stop-color="#06001a"/>
+    <linearGradient id="road-asphalt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#090614"/>
+      <stop offset="50%"  stop-color="#120c24"/>
+      <stop offset="100%" stop-color="#05030b"/>
     </linearGradient>
-    <linearGradient id="redneon" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#ff0022" stop-opacity="0"/>
-      <stop offset="50%"  stop-color="#ff0022" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#ff0022" stop-opacity="0"/>
+    <linearGradient id="wet-reflections" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#ff0055" stop-opacity="0.28"/>
+      <stop offset="25%"  stop-color="#00f3ff" stop-opacity="0.38"/>
+      <stop offset="50%"  stop-color="#a822ff" stop-opacity="0.25"/>
+      <stop offset="75%"  stop-color="#ffaa00" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#ff0055" stop-opacity="0.28"/>
     </linearGradient>
-    <linearGradient id="blueneon" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#00cfff" stop-opacity="0"/>
-      <stop offset="50%"  stop-color="#00cfff" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#00cfff" stop-opacity="0"/>
+    <linearGradient id="drone-beam" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#00f3ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
     </linearGradient>
-    <filter id="fr"><feGaussianBlur stdDeviation="3"/></filter>
-    <filter id="fb"><feGaussianBlur stdDeviation="2"/></filter>
-    <filter id="fs"><feGaussianBlur stdDeviation="1"/></filter>
+
+    <pattern id="pixel-grid" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="none" stroke="#ffffff" stroke-opacity="0.018" stroke-width="0.5"/>
+    </pattern>
   </defs>
 
-  <!-- Sky -->
-  <rect width="860" height="220" fill="url(#sky)"/>
+  <!-- SKY -->
+  <rect width="860" height="220" fill="url(#sky-gradient)"/>
+  <rect width="860" height="220" fill="url(#pixel-grid)"/>
 
   <!-- Stars -->
+  <g fill="#ffffff">
+    <rect x="18"  y="8"  width="2" height="2" opacity="0.8"/>
+    <rect x="85"  y="22" width="2" height="2" opacity="0.5"/>
+    <rect x="150" y="12" width="2" height="2" opacity="0.9"/>
+    <rect x="220" y="30" width="2" height="2" opacity="0.4"/>
+    <rect x="310" y="10" width="2" height="2" opacity="0.85"/>
+    <rect x="420" y="25" width="2" height="2" opacity="0.3"/>
+    <rect x="540" y="8"  width="2" height="2" opacity="0.9"/>
+    <rect x="630" y="18" width="2" height="2" opacity="0.6"/>
+    <rect x="720" y="12" width="2" height="2" opacity="0.95"/>
+    <rect x="810" y="28" width="2" height="2" opacity="0.4"/>
+    <rect x="60"  y="16" width="1" height="1" opacity="0.6"/>
+    <rect x="180" y="6"  width="1" height="1" opacity="0.7"/>
+    <rect x="380" y="18" width="1" height="1" opacity="0.5"/>
+    <rect x="490" y="14" width="1" height="1" opacity="0.8"/>
+    <rect x="700" y="20" width="1" height="1" opacity="0.6"/>
+    <rect x="840" y="8"  width="1" height="1" opacity="0.9"/>
+  </g>
+
+  <!-- Synth Sun -->
+  <circle cx="680" cy="55" r="32" fill="#ffaa00" opacity="0.18"/>
+  <circle cx="680" cy="55" r="24" fill="#ff0055" opacity="0.85" filter="url(#glow-pink)"/>
+  <rect x="645" y="48" width="70" height="2"  fill="#0b031a"/>
+  <rect x="645" y="53" width="70" height="2"  fill="#0b031a"/>
+  <rect x="645" y="58" width="70" height="3"  fill="#0b031a"/>
+  <rect x="645" y="64" width="70" height="4"  fill="#0b031a"/>
+  <rect x="645" y="71" width="70" height="5"  fill="#0b031a"/>
+
+  <!-- Mount Fuji -->
+  <polygon points="10,165 100,82 190,165" fill="#070314"/>
+  <polygon points="88,93 100,82 112,93 106,98 100,94 94,98" fill="#ff0055" opacity="0.45" filter="url(#glow-pink)"/>
+  <polygon points="90,95 100,85 110,95 105,97 100,94 95,97" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Far silhouette -->
+  <g fill="#070417">
+    <rect x="0"   y="110" width="35"  height="55"/>
+    <rect x="30"  y="95"  width="28"  height="70"/>
+    <rect x="65"  y="118" width="45"  height="47"/>
+    <rect x="135" y="100" width="40"  height="65"/>
+    <rect x="235" y="112" width="55"  height="53"/>
+    <rect x="310" y="85"  width="38"  height="80"/>
+    <rect x="410" y="105" width="50"  height="60"/>
+    <rect x="480" y="90"  width="42"  height="75"/>
+    <rect x="580" y="80"  width="55"  height="85"/>
+    <rect x="770" y="95"  width="90"  height="70"/>
+  </g>
+
+  <!-- ── TOKYO SPIRE ── -->
+  <g id="tokyo-spire">
+    <rect x="164" y="15"  width="2"  height="150" fill="#ff0055"/>
+    <rect x="163" y="13"  width="4"  height="4"   class="anim-strobe-1"/>
+    <path d="M163 38 L167 38 L170 75 L160 75 Z"   fill="#e6004c"/>
+    <path d="M159 75 L171 75 L177 125 L153 125 Z"  fill="#b3003b"/>
+    <path d="M152 125 L178 125 L184 165 L146 165 Z" fill="#80002a"/>
+    <rect x="162" y="50"  width="6"  height="2"   fill="#ffffff"/>
+    <rect x="158" y="80"  width="14" height="3"   fill="#ffffff"/>
+    <rect x="151" y="127" width="28" height="3"   fill="#ffffff"/>
+    <rect x="155" y="88"  width="20" height="9"   fill="#00f3ff" filter="url(#glow-cyan)" opacity="0.9"/>
+    <rect x="157" y="90"  width="16" height="5"   fill="#ffffff"/>
+  </g>
+
+  <!-- ── ORIENTAL PEARL ── -->
+  <g id="oriental-pearl">
+    <rect x="365" y="130" width="4"  height="35" fill="#1c133a"/>
+    <rect x="381" y="130" width="4"  height="35" fill="#1c133a"/>
+    <line x1="360" y1="165" x2="375" y2="130" stroke="#ff0055" stroke-width="2"/>
+    <line x1="390" y1="165" x2="375" y2="130" stroke="#ff0055" stroke-width="2"/>
+    <rect x="372" y="25"  width="6"  height="140" fill="#25194d"/>
+    <rect x="374" y="20"  width="2"  height="145" fill="#00f3ff" opacity="0.8"/>
+    <rect x="373" y="12"  width="4"  height="4"   class="anim-strobe-2"/>
+    <circle cx="375" cy="118" r="14" fill="#ff0055" class="anim-pearl"/>
+    <circle cx="375" cy="118" r="10" fill="#ffffff" opacity="0.8"/>
+    <circle cx="375" cy="72"  r="10" fill="#00f3ff" class="anim-pearl"/>
+    <circle cx="375" cy="72"  r="6"  fill="#ffffff" opacity="0.9"/>
+    <circle cx="375" cy="38"  r="5"  fill="#ffaa00" filter="url(#glow-gold)"/>
+    <rect x="367" y="116" width="16" height="4"  fill="#120a28"/>
+    <rect x="369" y="70"  width="12" height="3"  fill="#120a28"/>
+  </g>
+
+  <!-- ── SHANGHAI TOWER ── -->
+  <g id="shanghai-tower">
+    <path d="M520 165 L526 22 L554 22 L560 165 Z" fill="#110a29" stroke="#1d1245" stroke-width="1"/>
+    <path d="M524 165 L528 25 L542 25 L538 165 Z" fill="#180e38"/>
+    <line x1="521" y1="150" x2="559" y2="142" stroke="#00f3ff" stroke-width="1.5" filter="url(#glow-cyan)"/>
+    <line x1="522" y1="120" x2="558" y2="112" stroke="#ff0055" stroke-width="1.5" filter="url(#glow-pink)"/>
+    <line x1="523" y1="90"  x2="556" y2="83"  stroke="#00f3ff" stroke-width="1.5" filter="url(#glow-cyan)"/>
+    <line x1="524" y1="60"  x2="555" y2="54"  stroke="#ffaa00" stroke-width="1.5" filter="url(#glow-gold)"/>
+    <line x1="525" y1="35"  x2="554" y2="30"  stroke="#00f3ff" stroke-width="1.5" opacity="0.8"/>
+    <rect x="538" y="18"  width="4" height="4" class="anim-strobe-1"/>
+  </g>
+
+  <!-- ── SWFC BOTTLE OPENER ── -->
+  <g id="swfc-building">
+    <polygon points="710,165 720,28 755,28 765,165" fill="#130b2e" stroke="#251654" stroke-width="1"/>
+    <polygon points="727,42 748,42 745,62 730,62" fill="#020108" stroke="#00f3ff" stroke-width="1"/>
+    <line x1="727" y1="42" x2="748" y2="42" stroke="#00f3ff" stroke-width="2" filter="url(#glow-cyan)"/>
+    <text x="737" y="86" font-family="monospace" font-size="7" fill="#ffaa00" text-anchor="middle" class="anim-flicker-a">金融</text>
+  </g>
+
+  <!-- ── FOREGROUND BUILDINGS ── -->
+
+  <!-- Noodle bar -->
+  <rect x="15"  y="60"  width="60"  height="105" fill="#140c2e" stroke="#251752" stroke-width="1"/>
+  <rect x="22"  y="70"  width="46"  height="16"  fill="#ff0055" opacity="0.18"/>
+  <text x="45"  y="82"  font-family="monospace" font-size="6" fill="#ff0055" text-anchor="middle" class="anim-flicker-b" filter="url(#glow-pink)">ラーメン BAR</text>
+  <g fill="#ffaa00" filter="url(#glow-gold)">
+    <rect x="25" y="92" width="6" height="9" rx="1"/>
+    <rect x="37" y="92" width="6" height="9" rx="1"/>
+    <rect x="49" y="92" width="6" height="9" rx="1"/>
+    <rect x="61" y="92" width="6" height="9" rx="1"/>
+  </g>
+  <g fill="#00f3ff" opacity="0.75">
+    <rect x="24" y="110" width="6" height="4" class="anim-flicker-a"/>
+    <rect x="36" y="110" width="6" height="4"/>
+    <rect x="52" y="110" width="6" height="4"/>
+    <rect x="24" y="125" width="6" height="4"/>
+    <rect x="40" y="125" width="6" height="4" class="anim-flicker-a"/>
+  </g>
+
+  <!-- Holo-Dragon HQ -->
+  <rect x="230" y="40"  width="80"  height="125" fill="#160e33" stroke="#28195a" stroke-width="1"/>
+  <rect x="238" y="52"  width="64"  height="45"  fill="#050212" stroke="#00f3ff" stroke-width="1"/>
+  <g class="anim-dragon">
+    <path d="M245 76 Q255 62 270 70 T292 68 Q298 78 285 82 T260 78 Z" fill="none" stroke="#00f3ff" stroke-width="2" filter="url(#glow-cyan)"/>
+    <circle cx="292" cy="68" r="2" fill="#ff0055" filter="url(#glow-pink)"/>
+    <path d="M294 68 L300 66 M294 69 L299 72" stroke="#ff0055" stroke-width="1"/>
+  </g>
+  <line x1="238" y1="62" x2="302" y2="62" stroke="#00f3ff" stroke-opacity="0.3"/>
+  <line x1="238" y1="72" x2="302" y2="72" stroke="#00f3ff" stroke-opacity="0.3"/>
+  <line x1="238" y1="82" x2="302" y2="82" stroke="#00f3ff" stroke-opacity="0.3"/>
+  <text x="270" y="112" font-family="monospace" font-size="8" fill="#ffaa00" text-anchor="middle" class="anim-flicker-a">上海 電脳</text>
+
+  <!-- Augmentation clinic -->
+  <rect x="430" y="55"  width="65"  height="110" fill="#120a28"/>
+  <rect x="433" y="58"  width="3"   height="100" fill="#00f3ff" class="anim-flicker-a"/>
+  <rect x="455" y="66"  width="12"  height="12"  fill="#00ff66" opacity="0.18"/>
+  <path d="M459 68 H463 V76 H459 Z M457 70 H465 V74 H457 Z" fill="#00ff66" filter="url(#glow-cyan)"/>
+  <text x="462" y="95" font-family="monospace" font-size="7" fill="#00f3ff" text-anchor="middle" class="anim-flicker-b">義体</text>
+
+  <!-- Capsule hotel -->
+  <rect x="620" y="48"  width="75"  height="117" fill="#180e38"/>
+  <g class="anim-lotus">
+    <circle cx="0"  cy="0" r="8"  fill="none" stroke="#ff0055" stroke-width="1.5" filter="url(#glow-pink)"/>
+    <polygon points="0,-8 4,0 0,8 -4,0"  fill="#ff0055" opacity="0.7"/>
+    <polygon points="-8,0 0,4 8,0 0,-4"  fill="#00f3ff" opacity="0.7"/>
+  </g>
+  <text x="657" y="92" font-family="monospace" font-size="7" fill="#ff0055" text-anchor="middle" class="anim-flicker-a">東京 夜</text>
+  <g fill="#ffaa00" opacity="0.85">
+    <circle cx="636" cy="108" r="3"/>
+    <circle cx="657" cy="108" r="3" class="anim-flicker-a"/>
+    <circle cx="678" cy="108" r="3"/>
+    <circle cx="636" cy="122" r="3"/>
+    <circle cx="657" cy="122" r="3"/>
+    <circle cx="678" cy="122" r="3" class="anim-flicker-a"/>
+  </g>
+
+  <!-- ── MONORAIL ── -->
+  <rect x="100" y="142" width="8"   height="28" fill="#1a1133"/>
+  <rect x="300" y="142" width="8"   height="28" fill="#1a1133"/>
+  <rect x="500" y="142" width="8"   height="28" fill="#1a1133"/>
+  <rect x="700" y="142" width="8"   height="28" fill="#1a1133"/>
+  <rect x="0"   y="140" width="860" height="4"  fill="#291b4e"/>
+  <rect x="0"   y="142" width="860" height="1.5" fill="#00f3ff" opacity="0.85" filter="url(#glow-cyan)"/>
+
+  <g class="anim-monorail">
+    <g transform="translate(0,131)">
+      <path d="M0 6 L16 1 L95 1 L110 6 L105 10 L0 10 Z" fill="#f0f0f0"/>
+      <path d="M12 2 L90 2 L100 6 L12 6 Z" fill="#00f3ff" opacity="0.95" filter="url(#glow-cyan)"/>
+      <rect x="-15" y="7"  width="16" height="2"  fill="#ff0055" filter="url(#glow-pink)"/>
+      <rect x="108" y="4"  width="4"  height="3"  fill="#ffffff" filter="url(#glow-cyan)"/>
+    </g>
+  </g>
+
+  <!-- ── SHUTTLE ── -->
+  <g class="anim-shuttle">
+    <g transform="translate(0,48)">
+      <rect x="0"  y="2"  width="22" height="5" fill="#2d1d59"/>
+      <rect x="4"  y="0"  width="14" height="3" fill="#00f3ff" filter="url(#glow-cyan)"/>
+      <circle cx="2" cy="4" r="1.5" fill="#ff0055"/>
+      <polygon points="22,2 32,4.5 22,7" fill="#ffffff" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- ── ROAD ── -->
+  <rect x="0" y="165" width="860" height="55" fill="url(#road-asphalt)"/>
+  <rect x="0" y="165" width="860" height="3"  fill="#322259"/>
+  <rect x="0" y="167" width="860" height="1.2" fill="#ff0055" opacity="0.8" filter="url(#glow-pink)"/>
+  <rect x="0" y="170" width="860" height="50" fill="url(#wet-reflections)"/>
+  <g fill="#ffaa00" opacity="0.8">
+    <rect x="15"  y="192" width="22" height="2"/>
+    <rect x="95"  y="192" width="22" height="2"/>
+    <rect x="175" y="192" width="22" height="2"/>
+    <rect x="255" y="192" width="22" height="2"/>
+    <rect x="335" y="192" width="22" height="2"/>
+    <rect x="415" y="192" width="22" height="2"/>
+    <rect x="495" y="192" width="22" height="2"/>
+    <rect x="575" y="192" width="22" height="2"/>
+    <rect x="655" y="192" width="22" height="2"/>
+    <rect x="735" y="192" width="22" height="2"/>
+    <rect x="815" y="192" width="22" height="2"/>
+  </g>
+  <rect x="0" y="218" width="860" height="2" fill="#00f3ff" opacity="0.9" filter="url(#glow-cyan)"/>
+
+  <!-- ── VEHICLES ── -->
+
+  <!-- Sports car eastbound -->
+  <g class="anim-car-east">
+    <g transform="translate(0,196)">
+      <rect x="4"  y="11" width="44" height="3"  fill="#000000" opacity="0.5"/>
+      <rect x="8"  y="4"  width="36" height="6"  fill="#e6004c"/>
+      <rect x="14" y="1"  width="18" height="4"  fill="#0a0514"/>
+      <rect x="16" y="2"  width="14" height="2"  fill="#00f3ff" opacity="0.9"/>
+      <rect x="2"  y="7"  width="46" height="4"  fill="#ff0055"/>
+      <rect x="8"  y="9"  width="6"  height="4"  fill="#12101a"/>
+      <rect x="34" y="9"  width="6"  height="4"  fill="#12101a"/>
+      <circle cx="11" cy="11" r="1.5" fill="#00f3ff"/>
+      <circle cx="37" cy="11" r="1.5" fill="#00f3ff"/>
+      <rect x="46" y="7"  width="2"  height="2"  fill="#ffffff" filter="url(#glow-cyan)"/>
+      <polygon points="48,6 85,2 85,14 48,10" fill="#00f3ff" opacity="0.18"/>
+      <rect x="-20" y="8" width="22" height="1.8" fill="#ff0055" opacity="0.85"/>
+    </g>
+  </g>
+
+  <!-- Bike eastbound fast -->
+  <g class="anim-bike">
+    <g transform="translate(0,200)">
+      <rect x="4"  y="3"  width="18" height="5"  fill="#ff0055"/>
+      <rect x="8"  y="1"  width="8"  height="3"  fill="#0d0717"/>
+      <circle cx="11" cy="2" r="1.5" fill="#00f3ff"/>
+      <circle cx="4"  cy="7" r="2.5" fill="#00f3ff" filter="url(#glow-cyan)"/>
+      <circle cx="20" cy="7" r="2.5" fill="#00f3ff" filter="url(#glow-cyan)"/>
+      <rect x="-35" y="5" width="38" height="1.8" fill="#ff0055" opacity="0.95"/>
+    </g>
+  </g>
+
+  <!-- Police spinner westbound -->
+  <g class="anim-car-west">
+    <g transform="translate(0,174)">
+      <rect x="4"  y="4"  width="40" height="7"  fill="#f0f0f0"/>
+      <rect x="12" y="1"  width="22" height="4"  fill="#090514"/>
+      <rect x="2"  y="7"  width="44" height="4"  fill="#121024"/>
+      <rect x="22" y="-1" width="4"  height="2"  class="anim-strobe-1"/>
+      <rect x="0"  y="6"  width="3"  height="2"  fill="#00f3ff" filter="url(#glow-cyan)"/>
+      <polygon points="0,5 -38,1 -38,13 0,9" fill="#00f3ff" opacity="0.18"/>
+    </g>
+  </g>
+
+  <!-- ── DRONE ── -->
+  <g class="anim-drone">
+    <g transform="translate(0,22)">
+      <rect x="10" y="0"  width="18" height="5"  fill="#2d224d"/>
+      <rect x="6"  y="2"  width="26" height="2"  fill="#00f3ff"/>
+      <rect x="17" y="4"  width="4"  height="3"  class="anim-strobe-1"/>
+      <g class="anim-searchlight">
+        <polygon points="19,7 -18,115 56,115" fill="url(#drone-beam)"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ── STEAM ── -->
   <g fill="#ffffff" opacity="0.55">
-    <rect x="14"  y="6"  width="1" height="1"/>
-    <rect x="42"  y="11" width="1" height="1"/>
-    <rect x="78"  y="4"  width="1" height="1"/>
-    <rect x="115" y="9"  width="1" height="1"/>
-    <rect x="163" y="5"  width="1" height="1"/>
-    <rect x="200" y="13" width="1" height="1"/>
-    <rect x="245" y="7"  width="1" height="1"/>
-    <rect x="298" y="3"  width="1" height="1"/>
-    <rect x="340" y="10" width="1" height="1"/>
-    <rect x="390" y="6"  width="1" height="1"/>
-    <rect x="435" y="14" width="1" height="1"/>
-    <rect x="480" y="4"  width="1" height="1"/>
-    <rect x="528" y="9"  width="1" height="1"/>
-    <rect x="574" y="5"  width="1" height="1"/>
-    <rect x="620" y="12" width="1" height="1"/>
-    <rect x="668" y="7"  width="1" height="1"/>
-    <rect x="714" y="3"  width="1" height="1"/>
-    <rect x="758" y="11" width="1" height="1"/>
-    <rect x="800" y="6"  width="1" height="1"/>
-    <rect x="845" y="9"  width="1" height="1"/>
-    <rect x="28"  y="19" width="1" height="1"/>
-    <rect x="96"  y="17" width="1" height="1"/>
-    <rect x="192" y="20" width="1" height="1"/>
-    <rect x="310" y="16" width="1" height="1"/>
-    <rect x="455" y="18" width="1" height="1"/>
-    <rect x="552" y="15" width="1" height="1"/>
-    <rect x="688" y="19" width="1" height="1"/>
-    <rect x="780" y="17" width="1" height="1"/>
-  </g>
-
-  <!-- Moon glow -->
-  <circle cx="790" cy="26" r="14" fill="#fef9e7" opacity="0.08" filter="url(#fr)"/>
-  <circle cx="790" cy="26" r="10" fill="#fef9e7" opacity="0.15" filter="url(#fb)"/>
-  <circle cx="790" cy="26" r="7"  fill="#fef3c7" opacity="0.85"/>
-  <circle cx="794" cy="23" r="6"  fill="#06001a" opacity="0.9"/>
-
-  <!-- ── BACK LAYER buildings ── -->
-  <g fill="#0e0828" opacity="0.9">
-    <rect x="0"   y="110" width="24" height="110"/>
-    <rect x="26"  y="120" width="18" height="100"/>
-    <rect x="46"  y="105" width="22" height="115"/>
-    <rect x="70"  y="115" width="20" height="105"/>
-    <rect x="92"  y="100" width="26" height="120"/>
-    <rect x="120" y="112" width="20" height="108"/>
-    <rect x="142" y="95"  width="28" height="125"/>
-    <rect x="172" y="108" width="22" height="112"/>
-    <rect x="196" y="100" width="30" height="120"/>
-    <rect x="228" y="115" width="18" height="105"/>
-    <rect x="248" y="98"  width="26" height="122"/>
-    <rect x="276" y="106" width="22" height="114"/>
-    <rect x="300" y="92"  width="32" height="128"/>
-    <rect x="334" y="110" width="20" height="110"/>
-    <rect x="356" y="102" width="28" height="118"/>
-    <rect x="386" y="96"  width="24" height="124"/>
-    <rect x="412" y="108" width="20" height="112"/>
-    <rect x="434" y="100" width="30" height="120"/>
-    <rect x="466" y="114" width="18" height="106"/>
-    <rect x="486" y="94"  width="28" height="126"/>
-    <rect x="516" y="104" width="24" height="116"/>
-    <rect x="542" y="98"  width="26" height="122"/>
-    <rect x="570" y="110" width="22" height="110"/>
-    <rect x="594" y="92"  width="32" height="128"/>
-    <rect x="628" y="106" width="20" height="114"/>
-    <rect x="650" y="100" width="28" height="120"/>
-    <rect x="680" y="112" width="22" height="108"/>
-    <rect x="704" y="96"  width="26" height="124"/>
-    <rect x="732" y="104" width="20" height="116"/>
-    <rect x="754" y="98"  width="30" height="122"/>
-    <rect x="786" y="108" width="24" height="112"/>
-    <rect x="812" y="94"  width="22" height="126"/>
-    <rect x="836" y="102" width="24" height="118"/>
-  </g>
-
-  <!-- ── MID LAYER buildings ── -->
-
-  <!-- Building 1 - far left tower -->
-  <rect x="0"   y="72"  width="28" height="148" fill="#130a30"/>
-  <rect x="4"   y="65"  width="20" height="9"   fill="#130a30"/>
-  <rect x="9"   y="58"  width="10" height="9"   fill="#130a30"/>
-  <rect x="13"  y="50"  width="2"  height="10"  fill="#e0222a"/>
-
-  <!-- Building 2 -->
-  <rect x="38"  y="60"  width="36" height="160" fill="#1a0e3c"/>
-  <rect x="42"  y="52"  width="28" height="10"  fill="#1a0e3c"/>
-  <rect x="47"  y="44"  width="18" height="10"  fill="#1a0e3c"/>
-  <rect x="54"  y="37"  width="4"  height="9"   fill="#00cfff"/>
-  <!-- windows b2 -->
-  <g class="b1" fill="#fbbf24" opacity="0.85">
-    <rect x="42" y="66" width="4" height="4"/><rect x="50" y="66" width="4" height="4"/>
-    <rect x="58" y="66" width="4" height="4"/><rect x="66" y="66" width="4" height="4"/>
-    <rect x="42" y="74" width="4" height="4"/><rect x="66" y="74" width="4" height="4"/>
-    <rect x="50" y="82" width="4" height="4"/><rect x="58" y="82" width="4" height="4"/>
-    <rect x="42" y="90" width="4" height="4"/><rect x="66" y="90" width="4" height="4"/>
-  </g>
-  <g class="b2" fill="#00cfff" opacity="0.75">
-    <rect x="50" y="74" width="4" height="4"/><rect x="58" y="74" width="4" height="4"/>
-    <rect x="42" y="82" width="4" height="4"/><rect x="66" y="82" width="4" height="4"/>
-  </g>
-  <!-- neon sign b2 -->
-  <rect x="40" y="104" width="32" height="3" fill="url(#redneon)" class="g1"/>
-  <rect x="40" y="104" width="32" height="3" fill="#ff0022" opacity="0.15" filter="url(#fr)"/>
-
-  <!-- Building 3 - thin tower -->
-  <rect x="86"  y="45"  width="20" height="175" fill="#1c1044"/>
-  <rect x="89"  y="37"  width="14" height="10"  fill="#1c1044"/>
-  <rect x="92"  y="30"  width="8"  height="9"   fill="#1c1044"/>
-  <rect x="95"  y="22"  width="2"  height="10"  fill="#e0222a"/>
-  <g class="b3" fill="#7dd3fc" opacity="0.7">
-    <rect x="88" y="52" width="4" height="4"/><rect x="96" y="52" width="4" height="4"/>
-    <rect x="88" y="60" width="4" height="4"/>
-    <rect x="96" y="68" width="4" height="4"/><rect x="88" y="76" width="4" height="4"/>
-    <rect x="96" y="84" width="4" height="4"/><rect x="88" y="92" width="4" height="4"/>
-  </g>
-
-  <!-- Building 4 - wide block -->
-  <rect x="118" y="55"  width="52" height="165" fill="#160c38"/>
-  <rect x="122" y="47"  width="44" height="10"  fill="#160c38"/>
-  <!-- big neon sign face -->
-  <rect x="122" y="60"  width="44" height="22"  fill="#1e0a10"/>
-  <rect x="124" y="62"  width="40" height="18"  fill="#2a0810" class="g2"/>
-  <!-- "SEG" text suggestion via blocks -->
-  <g fill="#ff0022" class="g1">
-    <rect x="126" y="64" width="6" height="2"/><rect x="126" y="68" width="6" height="2"/>
-    <rect x="126" y="72" width="6" height="2"/><rect x="126" y="64" width="2" height="4"/>
-    <rect x="126" y="70" width="2" height="4"/>
-    <rect x="136" y="64" width="2" height="8"/><rect x="140" y="64" width="2" height="8"/>
-    <rect x="136" y="64" width="6" height="2"/><rect x="136" y="72" width="6" height="2"/>
-    <rect x="149" y="64" width="6" height="2"/><rect x="149" y="72" width="6" height="2"/>
-    <rect x="149" y="64" width="2" height="5"/><rect x="152" y="68" width="3" height="2"/>
-    <rect x="153" y="68" width="2" height="5"/>
-  </g>
-  <g class="b1" fill="#fbbf24" opacity="0.85">
-    <rect x="122" y="88"  width="4" height="4"/><rect x="130" y="88"  width="4" height="4"/>
-    <rect x="138" y="88"  width="4" height="4"/><rect x="146" y="88"  width="4" height="4"/>
-    <rect x="154" y="88"  width="4" height="4"/>
-    <rect x="122" y="96"  width="4" height="4"/><rect x="154" y="96"  width="4" height="4"/>
-    <rect x="130" y="104" width="4" height="4"/><rect x="146" y="104" width="4" height="4"/>
-    <rect x="122" y="112" width="4" height="4"/><rect x="154" y="112" width="4" height="4"/>
-  </g>
-  <g class="b2" fill="#00cfff" opacity="0.65">
-    <rect x="138" y="96"  width="4" height="4"/>
-    <rect x="122" y="104" width="4" height="4"/><rect x="154" y="104" width="4" height="4"/>
-    <rect x="138" y="112" width="4" height="4"/>
-  </g>
-
-  <!-- Building 5 - tall center-left -->
-  <rect x="182" y="36"  width="38" height="184" fill="#200e50"/>
-  <rect x="186" y="28"  width="30" height="10"  fill="#200e50"/>
-  <rect x="191" y="20"  width="20" height="10"  fill="#200e50"/>
-  <rect x="199" y="12"  width="4"  height="10"  fill="#e0222a"/>
-  <g class="b1" fill="#7dd3fc" opacity="0.75">
-    <rect x="186" y="42" width="4" height="4"/><rect x="194" y="42" width="4" height="4"/>
-    <rect x="202" y="42" width="4" height="4"/><rect x="210" y="42" width="4" height="4"/>
-    <rect x="186" y="50" width="4" height="4"/><rect x="210" y="50" width="4" height="4"/>
-    <rect x="194" y="58" width="4" height="4"/><rect x="202" y="58" width="4" height="4"/>
-    <rect x="186" y="66" width="4" height="4"/><rect x="210" y="66" width="4" height="4"/>
-    <rect x="194" y="74" width="4" height="4"/><rect x="202" y="74" width="4" height="4"/>
-    <rect x="186" y="82" width="4" height="4"/><rect x="210" y="82" width="4" height="4"/>
-  </g>
-  <g class="b3" fill="#fbbf24" opacity="0.8">
-    <rect x="194" y="50" width="4" height="4"/><rect x="202" y="50" width="4" height="4"/>
-    <rect x="186" y="58" width="4" height="4"/><rect x="210" y="58" width="4" height="4"/>
-    <rect x="194" y="66" width="4" height="4"/><rect x="202" y="66" width="4" height="4"/>
-  </g>
-  <rect x="184" y="98"  width="34" height="4" fill="url(#redneon)" class="g1"/>
-  <rect x="184" y="98"  width="34" height="4" fill="#ff0022" opacity="0.2" filter="url(#fr)"/>
-
-  <!-- Building 6 -->
-  <rect x="232" y="62"  width="32" height="158" fill="#18083a"/>
-  <g class="b2" fill="#fbbf24" opacity="0.8">
-    <rect x="236" y="68" width="4" height="4"/><rect x="244" y="68" width="4" height="4"/>
-    <rect x="252" y="68" width="4" height="4"/>
-    <rect x="236" y="76" width="4" height="4"/><rect x="252" y="76" width="4" height="4"/>
-    <rect x="244" y="84" width="4" height="4"/>
-    <rect x="236" y="92" width="4" height="4"/><rect x="252" y="92" width="4" height="4"/>
-  </g>
-  <g class="b1" fill="#00cfff" opacity="0.65">
-    <rect x="244" y="76" width="4" height="4"/>
-    <rect x="236" y="84" width="4" height="4"/><rect x="252" y="84" width="4" height="4"/>
-  </g>
-  <rect x="234" y="106" width="26" height="3" fill="url(#blueneon)" class="g2"/>
-
-  <!-- Building 7 - CENTER HERO -->
-  <rect x="276" y="24"  width="44" height="196" fill="#261260"/>
-  <rect x="280" y="14"  width="36" height="12"  fill="#261260"/>
-  <rect x="286" y="6"   width="24" height="10"  fill="#261260"/>
-  <rect x="296" y="0"   width="4"  height="8"   fill="#e0222a"/>
-  <!-- hero windows -->
-  <g class="b1" fill="#7dd3fc" opacity="0.8">
-    <rect x="280" y="30" width="4" height="4"/><rect x="288" y="30" width="4" height="4"/>
-    <rect x="296" y="30" width="4" height="4"/><rect x="304" y="30" width="4" height="4"/>
-    <rect x="312" y="30" width="4" height="4"/>
-    <rect x="280" y="38" width="4" height="4"/><rect x="312" y="38" width="4" height="4"/>
-    <rect x="288" y="46" width="4" height="4"/><rect x="304" y="46" width="4" height="4"/>
-    <rect x="280" y="54" width="4" height="4"/><rect x="312" y="54" width="4" height="4"/>
-    <rect x="296" y="54" width="4" height="4"/>
-    <rect x="288" y="62" width="4" height="4"/><rect x="304" y="62" width="4" height="4"/>
-    <rect x="280" y="70" width="4" height="4"/><rect x="312" y="70" width="4" height="4"/>
-  </g>
-  <g class="b3" fill="#fbbf24" opacity="0.85">
-    <rect x="288" y="38" width="4" height="4"/><rect x="296" y="38" width="4" height="4"/>
-    <rect x="304" y="38" width="4" height="4"/>
-    <rect x="280" y="46" width="4" height="4"/><rect x="312" y="46" width="4" height="4"/>
-    <rect x="296" y="62" width="4" height="4"/>
-    <rect x="288" y="70" width="4" height="4"/><rect x="304" y="70" width="4" height="4"/>
-  </g>
-  <!-- big hero neon sign -->
-  <rect x="278" y="90"  width="40" height="5" fill="#ff0022" opacity="0.9" class="g1"/>
-  <rect x="278" y="90"  width="40" height="5" fill="#ff0022" opacity="0.3" filter="url(#fr)"/>
-  <rect x="278" y="100" width="40" height="3" fill="url(#blueneon)" class="g2"/>
-
-  <!-- Building 8 -->
-  <rect x="332" y="50"  width="36" height="170" fill="#1c0c42"/>
-  <rect x="336" y="42"  width="28" height="10"  fill="#1c0c42"/>
-  <rect x="341" y="35"  width="18" height="9"   fill="#1c0c42"/>
-  <rect x="348" y="28"  width="4"  height="9"   fill="#00cfff"/>
-  <g class="b2" fill="#fbbf24" opacity="0.8">
-    <rect x="336" y="56" width="4" height="4"/><rect x="344" y="56" width="4" height="4"/>
-    <rect x="352" y="56" width="4" height="4"/><rect x="360" y="56" width="4" height="4"/>
-    <rect x="336" y="64" width="4" height="4"/><rect x="360" y="64" width="4" height="4"/>
-    <rect x="344" y="72" width="4" height="4"/><rect x="352" y="72" width="4" height="4"/>
-    <rect x="336" y="80" width="4" height="4"/><rect x="360" y="80" width="4" height="4"/>
-  </g>
-  <g class="b1" fill="#00cfff" opacity="0.65">
-    <rect x="344" y="64" width="4" height="4"/><rect x="352" y="64" width="4" height="4"/>
-    <rect x="336" y="72" width="4" height="4"/><rect x="360" y="72" width="4" height="4"/>
-  </g>
-  <rect x="334" y="96"  width="32" height="3" fill="url(#redneon)" class="g1"/>
-
-  <!-- Building 9 -->
-  <rect x="380" y="58"  width="30" height="162" fill="#180a3a"/>
-  <g class="b3" fill="#fbbf24" opacity="0.8">
-    <rect x="384" y="64" width="4" height="4"/><rect x="392" y="64" width="4" height="4"/>
-    <rect x="400" y="64" width="4" height="4"/>
-    <rect x="384" y="72" width="4" height="4"/><rect x="400" y="72" width="4" height="4"/>
-    <rect x="392" y="80" width="4" height="4"/>
-    <rect x="384" y="88" width="4" height="4"/><rect x="400" y="88" width="4" height="4"/>
-  </g>
-  <g class="b2" fill="#7dd3fc" opacity="0.65">
-    <rect x="392" y="72" width="4" height="4"/>
-    <rect x="384" y="80" width="4" height="4"/><rect x="400" y="80" width="4" height="4"/>
-  </g>
-
-  <!-- Building 10 - second tall tower -->
-  <rect x="422" y="30"  width="40" height="190" fill="#221060"/>
-  <rect x="426" y="22"  width="32" height="10"  fill="#221060"/>
-  <rect x="432" y="14"  width="20" height="10"  fill="#221060"/>
-  <rect x="440" y="6"   width="4"  height="10"  fill="#e0222a"/>
-  <g class="b1" fill="#7dd3fc" opacity="0.75">
-    <rect x="426" y="36" width="4" height="4"/><rect x="434" y="36" width="4" height="4"/>
-    <rect x="442" y="36" width="4" height="4"/><rect x="450" y="36" width="4" height="4"/>
-    <rect x="426" y="44" width="4" height="4"/><rect x="454" y="44" width="4" height="4"/>
-    <rect x="434" y="52" width="4" height="4"/><rect x="446" y="52" width="4" height="4"/>
-    <rect x="426" y="60" width="4" height="4"/><rect x="454" y="60" width="4" height="4"/>
-    <rect x="442" y="68" width="4" height="4"/>
-    <rect x="426" y="76" width="4" height="4"/><rect x="454" y="76" width="4" height="4"/>
-  </g>
-  <g class="b2" fill="#fbbf24" opacity="0.8">
-    <rect x="434" y="44" width="4" height="4"/><rect x="446" y="44" width="4" height="4"/>
-    <rect x="426" y="52" width="4" height="4"/><rect x="454" y="52" width="4" height="4"/>
-    <rect x="434" y="60" width="4" height="4"/><rect x="446" y="60" width="4" height="4"/>
-    <rect x="434" y="76" width="4" height="4"/><rect x="446" y="76" width="4" height="4"/>
-  </g>
-  <rect x="424" y="92"  width="36" height="5" fill="#ff0022" opacity="0.9" class="g1"/>
-  <rect x="424" y="92"  width="36" height="5" fill="#ff0022" opacity="0.25" filter="url(#fr)"/>
-  <rect x="424" y="102" width="36" height="3" fill="url(#blueneon)" class="g2"/>
-
-  <!-- Building 11 -->
-  <rect x="474" y="55"  width="34" height="165" fill="#1a0c3e"/>
-  <rect x="478" y="47"  width="26" height="10"  fill="#1a0c3e"/>
-  <rect x="483" y="40"  width="16" height="9"   fill="#1a0c3e"/>
-  <rect x="490" y="33"  width="2"  height="9"   fill="#00cfff"/>
-  <g class="b3" fill="#fbbf24" opacity="0.8">
-    <rect x="478" y="60" width="4" height="4"/><rect x="486" y="60" width="4" height="4"/>
-    <rect x="494" y="60" width="4" height="4"/><rect x="500" y="60" width="4" height="4"/>
-    <rect x="478" y="68" width="4" height="4"/><rect x="500" y="68" width="4" height="4"/>
-    <rect x="486" y="76" width="4" height="4"/><rect x="494" y="76" width="4" height="4"/>
-    <rect x="478" y="84" width="4" height="4"/><rect x="500" y="84" width="4" height="4"/>
-  </g>
-  <g class="b1" fill="#00cfff" opacity="0.65">
-    <rect x="486" y="68" width="4" height="4"/><rect x="494" y="68" width="4" height="4"/>
-  </g>
-  <rect x="476" y="100" width="30" height="3" fill="url(#redneon)" class="g1"/>
-
-  <!-- Building 12 -->
-  <rect x="520" y="62"  width="28" height="158" fill="#160a36"/>
-  <g class="b2" fill="#fbbf24" opacity="0.8">
-    <rect x="524" y="68" width="4" height="4"/><rect x="532" y="68" width="4" height="4"/>
-    <rect x="540" y="68" width="4" height="4"/>
-    <rect x="524" y="76" width="4" height="4"/><rect x="540" y="76" width="4" height="4"/>
-    <rect x="532" y="84" width="4" height="4"/>
-    <rect x="524" y="92" width="4" height="4"/><rect x="540" y="92" width="4" height="4"/>
-  </g>
-  <g class="b3" fill="#7dd3fc" opacity="0.65">
-    <rect x="532" y="76" width="4" height="4"/>
-    <rect x="524" y="84" width="4" height="4"/><rect x="540" y="84" width="4" height="4"/>
-  </g>
-
-  <!-- Building 13 - right tall tower -->
-  <rect x="560" y="38"  width="42" height="182" fill="#200e56"/>
-  <rect x="564" y="30"  width="34" height="10"  fill="#200e56"/>
-  <rect x="570" y="22"  width="22" height="10"  fill="#200e56"/>
-  <rect x="579" y="14"  width="4"  height="10"  fill="#e0222a"/>
-  <g class="b1" fill="#7dd3fc" opacity="0.75">
-    <rect x="564" y="44" width="4" height="4"/><rect x="572" y="44" width="4" height="4"/>
-    <rect x="580" y="44" width="4" height="4"/><rect x="588" y="44" width="4" height="4"/>
-    <rect x="564" y="52" width="4" height="4"/><rect x="592" y="52" width="4" height="4"/>
-    <rect x="572" y="60" width="4" height="4"/><rect x="584" y="60" width="4" height="4"/>
-    <rect x="564" y="68" width="4" height="4"/><rect x="592" y="68" width="4" height="4"/>
-    <rect x="580" y="76" width="4" height="4"/>
-  </g>
-  <g class="b2" fill="#fbbf24" opacity="0.85">
-    <rect x="572" y="52" width="4" height="4"/><rect x="584" y="52" width="4" height="4"/>
-    <rect x="564" y="60" width="4" height="4"/><rect x="592" y="60" width="4" height="4"/>
-    <rect x="572" y="68" width="4" height="4"/><rect x="584" y="68" width="4" height="4"/>
-    <rect x="564" y="76" width="4" height="4"/><rect x="592" y="76" width="4" height="4"/>
-  </g>
-  <rect x="562" y="92"  width="38" height="5" fill="#ff0022" opacity="0.9" class="g1"/>
-  <rect x="562" y="92"  width="38" height="5" fill="#ff0022" opacity="0.25" filter="url(#fr)"/>
-  <rect x="562" y="102" width="38" height="3" fill="url(#blueneon)" class="g2"/>
-
-  <!-- Building 14 -->
-  <rect x="614" y="58"  width="32" height="162" fill="#1a0c3c"/>
-  <rect x="618" y="50"  width="24" height="10"  fill="#1a0c3c"/>
-  <rect x="623" y="43"  width="14" height="9"   fill="#1a0c3c"/>
-  <rect x="629" y="36"  width="2"  height="9"   fill="#00cfff"/>
-  <g class="b3" fill="#fbbf24" opacity="0.8">
-    <rect x="618" y="64" width="4" height="4"/><rect x="626" y="64" width="4" height="4"/>
-    <rect x="636" y="64" width="4" height="4"/>
-    <rect x="618" y="72" width="4" height="4"/><rect x="636" y="72" width="4" height="4"/>
-    <rect x="626" y="80" width="4" height="4"/>
-    <rect x="618" y="88" width="4" height="4"/><rect x="636" y="88" width="4" height="4"/>
-  </g>
-  <g class="b1" fill="#00cfff" opacity="0.65">
-    <rect x="626" y="72" width="4" height="4"/>
-    <rect x="618" y="80" width="4" height="4"/><rect x="636" y="80" width="4" height="4"/>
-  </g>
-  <rect x="616" y="104" width="28" height="3" fill="url(#redneon)" class="g1"/>
-
-  <!-- Building 15 -->
-  <rect x="658" y="48"  width="36" height="172" fill="#1e0e4c"/>
-  <rect x="662" y="40"  width="28" height="10"  fill="#1e0e4c"/>
-  <rect x="668" y="32"  width="16" height="10"  fill="#1e0e4c"/>
-  <rect x="674" y="24"  width="4"  height="10"  fill="#e0222a"/>
-  <g class="b2" fill="#7dd3fc" opacity="0.7">
-    <rect x="662" y="54" width="4" height="4"/><rect x="670" y="54" width="4" height="4"/>
-    <rect x="678" y="54" width="4" height="4"/><rect x="686" y="54" width="4" height="4"/>
-    <rect x="662" y="62" width="4" height="4"/><rect x="686" y="62" width="4" height="4"/>
-    <rect x="670" y="70" width="4" height="4"/><rect x="678" y="70" width="4" height="4"/>
-    <rect x="662" y="78" width="4" height="4"/><rect x="686" y="78" width="4" height="4"/>
-  </g>
-  <g class="b3" fill="#fbbf24" opacity="0.8">
-    <rect x="670" y="62" width="4" height="4"/><rect x="678" y="62" width="4" height="4"/>
-    <rect x="662" y="70" width="4" height="4"/><rect x="686" y="70" width="4" height="4"/>
-  </g>
-  <rect x="660" y="94"  width="32" height="4" fill="#ff0022" opacity="0.9" class="g1"/>
-  <rect x="660" y="94"  width="32" height="4" fill="#ff0022" opacity="0.2" filter="url(#fr)"/>
-
-  <!-- Building 16 -->
-  <rect x="706" y="60"  width="30" height="160" fill="#160a38"/>
-  <g class="b1" fill="#fbbf24" opacity="0.8">
-    <rect x="710" y="66" width="4" height="4"/><rect x="718" y="66" width="4" height="4"/>
-    <rect x="728" y="66" width="4" height="4"/>
-    <rect x="710" y="74" width="4" height="4"/><rect x="728" y="74" width="4" height="4"/>
-    <rect x="718" y="82" width="4" height="4"/>
-    <rect x="710" y="90" width="4" height="4"/><rect x="728" y="90" width="4" height="4"/>
-  </g>
-  <g class="b2" fill="#7dd3fc" opacity="0.65">
-    <rect x="718" y="74" width="4" height="4"/>
-    <rect x="710" y="82" width="4" height="4"/><rect x="728" y="82" width="4" height="4"/>
-  </g>
-  <rect x="708" y="104" width="26" height="3" fill="url(#blueneon)" class="g2"/>
-
-  <!-- Building 17 - far right tower -->
-  <rect x="748" y="44"  width="38" height="176" fill="#1e0c50"/>
-  <rect x="752" y="36"  width="30" height="10"  fill="#1e0c50"/>
-  <rect x="758" y="28"  width="18" height="10"  fill="#1e0c50"/>
-  <rect x="765" y="20"  width="4"  height="10"  fill="#e0222a"/>
-  <g class="b3" fill="#7dd3fc" opacity="0.75">
-    <rect x="752" y="50" width="4" height="4"/><rect x="760" y="50" width="4" height="4"/>
-    <rect x="768" y="50" width="4" height="4"/><rect x="778" y="50" width="4" height="4"/>
-    <rect x="752" y="58" width="4" height="4"/><rect x="778" y="58" width="4" height="4"/>
-    <rect x="760" y="66" width="4" height="4"/><rect x="770" y="66" width="4" height="4"/>
-    <rect x="752" y="74" width="4" height="4"/><rect x="778" y="74" width="4" height="4"/>
-    <rect x="768" y="82" width="4" height="4"/>
-  </g>
-  <g class="b1" fill="#fbbf24" opacity="0.85">
-    <rect x="760" y="58" width="4" height="4"/><rect x="770" y="58" width="4" height="4"/>
-    <rect x="752" y="66" width="4" height="4"/><rect x="778" y="66" width="4" height="4"/>
-    <rect x="760" y="74" width="4" height="4"/><rect x="770" y="74" width="4" height="4"/>
-    <rect x="752" y="82" width="4" height="4"/><rect x="778" y="82" width="4" height="4"/>
-  </g>
-  <rect x="750" y="98"  width="34" height="5" fill="#ff0022" opacity="0.9" class="g1"/>
-  <rect x="750" y="98"  width="34" height="5" fill="#ff0022" opacity="0.25" filter="url(#fr)"/>
-  <rect x="750" y="108" width="34" height="3" fill="url(#blueneon)" class="g2"/>
-
-  <!-- Building 18 far right -->
-  <rect x="798" y="65"  width="26" height="155" fill="#160a36"/>
-  <g class="b2" fill="#fbbf24" opacity="0.75">
-    <rect x="802" y="70" width="4" height="4"/><rect x="810" y="70" width="4" height="4"/>
-    <rect x="818" y="70" width="4" height="4"/>
-    <rect x="802" y="78" width="4" height="4"/><rect x="818" y="78" width="4" height="4"/>
-    <rect x="810" y="86" width="4" height="4"/>
-  </g>
-  <rect x="838" y="56"  width="22" height="164" fill="#1a0c3e"/>
-  <g class="b3" fill="#7dd3fc" opacity="0.65">
-    <rect x="842" y="62" width="4" height="4"/><rect x="850" y="62" width="4" height="4"/>
-    <rect x="842" y="70" width="4" height="4"/><rect x="850" y="70" width="4" height="4"/>
-    <rect x="842" y="78" width="4" height="4"/>
-  </g>
-
-  <!-- ── STREET ── -->
-  <rect x="0" y="192" width="860" height="28" fill="url(#street)"/>
-
-  <!-- Street center line -->
-  <g fill="#1a0a30" opacity="0.8">
-    <rect x="0"   y="192" width="860" height="2"/>
-  </g>
-
-  <!-- Red neon ground reflection -->
-  <rect x="0" y="192" width="860" height="3" fill="url(#redneon)" opacity="0.5" class="g1"/>
-  <rect x="0" y="192" width="860" height="6" fill="#ff0022" opacity="0.06" filter="url(#fr)"/>
-  <!-- Blue neon ground reflection -->
-  <rect x="0" y="196" width="860" height="2" fill="url(#blueneon)" opacity="0.4" class="g2"/>
-
-  <!-- Street puddle reflections -->
-  <rect x="80"  y="198" width="60"  height="3" fill="#ff0022" opacity="0.12" filter="url(#fs)"/>
-  <rect x="280" y="200" width="40"  height="2" fill="#ff0022" opacity="0.15" filter="url(#fs)"/>
-  <rect x="420" y="198" width="50"  height="3" fill="#00cfff" opacity="0.12" filter="url(#fs)"/>
-  <rect x="600" y="200" width="40"  height="2" fill="#ff0022" opacity="0.15" filter="url(#fs)"/>
-  <rect x="740" y="198" width="50"  height="3" fill="#00cfff" opacity="0.1"  filter="url(#fs)"/>
-
-  <!-- Street lights poles -->
-  <g fill="#0e0828">
-    <rect x="148" y="168" width="2" height="24"/>
-    <rect x="360" y="165" width="2" height="27"/>
-    <rect x="572" y="168" width="2" height="24"/>
-    <rect x="784" y="165" width="2" height="27"/>
-  </g>
-  <!-- Street light glow -->
-  <g class="g2" filter="url(#fs)">
-    <circle cx="149" cy="168" r="5" fill="#fffde7" opacity="0.6"/>
-    <circle cx="361" cy="165" r="5" fill="#fffde7" opacity="0.6"/>
-    <circle cx="573" cy="168" r="5" fill="#fffde7" opacity="0.6"/>
-    <circle cx="785" cy="165" r="5" fill="#fffde7" opacity="0.6"/>
+    <rect x="45"  y="45" width="3" height="3" class="anim-steam"/>
+    <rect x="260" y="32" width="4" height="4" class="anim-steam" style="animation-delay:0.7s"/>
+    <rect x="640" y="40" width="3" height="3" class="anim-steam" style="animation-delay:1.3s"/>
   </g>
 
   <!-- ── RAIN ── -->
-  <g stroke="#7dd3fc" stroke-width="0.5" opacity="0.18" class="r1">
-    <line x1="50"  y1="0" x2="48"  y2="14"/>
-    <line x1="140" y1="0" x2="138" y2="14"/>
-    <line x1="230" y1="0" x2="228" y2="14"/>
-    <line x1="320" y1="0" x2="318" y2="14"/>
-    <line x1="410" y1="0" x2="408" y2="14"/>
-    <line x1="500" y1="0" x2="498" y2="14"/>
-    <line x1="590" y1="0" x2="588" y2="14"/>
-    <line x1="680" y1="0" x2="678" y2="14"/>
-    <line x1="770" y1="0" x2="768" y2="14"/>
-    <line x1="860" y1="0" x2="858" y2="14"/>
+  <g opacity="0.35" stroke="#00f3ff" stroke-width="0.8" stroke-dasharray="4,10">
+    <g class="anim-rain">
+      <line x1="40"  y1="0" x2="10"  y2="220"/>
+      <line x1="130" y1="0" x2="100" y2="220"/>
+      <line x1="230" y1="0" x2="200" y2="220"/>
+      <line x1="340" y1="0" x2="310" y2="220"/>
+      <line x1="450" y1="0" x2="420" y2="220"/>
+      <line x1="560" y1="0" x2="530" y2="220"/>
+      <line x1="670" y1="0" x2="640" y2="220"/>
+      <line x1="780" y1="0" x2="750" y2="220"/>
+    </g>
   </g>
-  <g stroke="#7dd3fc" stroke-width="0.5" opacity="0.14" class="r2">
-    <line x1="20"  y1="0" x2="18"  y2="14"/>
-    <line x1="110" y1="0" x2="108" y2="14"/>
-    <line x1="200" y1="0" x2="198" y2="14"/>
-    <line x1="290" y1="0" x2="288" y2="14"/>
-    <line x1="380" y1="0" x2="378" y2="14"/>
-    <line x1="470" y1="0" x2="468" y2="14"/>
-    <line x1="560" y1="0" x2="558" y2="14"/>
-    <line x1="650" y1="0" x2="648" y2="14"/>
-    <line x1="740" y1="0" x2="738" y2="14"/>
-    <line x1="830" y1="0" x2="828" y2="14"/>
-  </g>
-  <g stroke="#ffffff" stroke-width="0.4" opacity="0.1" class="r3">
-    <line x1="75"  y1="0" x2="73"  y2="14"/>
-    <line x1="165" y1="0" x2="163" y2="14"/>
-    <line x1="255" y1="0" x2="253" y2="14"/>
-    <line x1="345" y1="0" x2="343" y2="14"/>
-    <line x1="435" y1="0" x2="433" y2="14"/>
-    <line x1="525" y1="0" x2="523" y2="14"/>
-    <line x1="615" y1="0" x2="613" y2="14"/>
-    <line x1="705" y1="0" x2="703" y2="14"/>
-    <line x1="795" y1="0" x2="793" y2="14"/>
+
+  <!-- ── RIPPLES ── -->
+  <g fill="none" stroke="#00f3ff" stroke-width="0.6" opacity="0.6">
+    <ellipse cx="140" cy="206" rx="6" ry="2" class="anim-ripple"/>
+    <ellipse cx="410" cy="211" rx="6" ry="2" class="anim-ripple" style="animation-delay:0.5s"/>
+    <ellipse cx="680" cy="204" rx="6" ry="2" class="anim-ripple" style="animation-delay:1.1s"/>
   </g>
 
 </svg>
