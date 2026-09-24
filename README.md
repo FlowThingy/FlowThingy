@@ -146,11 +146,11 @@ Things I've actually used across these projects:
 
 <div align="center">
 
-<!-- GitHub Stats Card — Tokyo Night theme -->
-<img src="https://github-readme-stats.vercel.app/api?username=FlowThingy&show_icons=true&theme=tokyonight&hide_border=true&title_color=e0222a&icon_color=e0222a&bg_color=0d1117&text_color=c9d1d9&ring_color=e0222a" height="160" alt="GitHub Stats" />
+<!-- GitHub Stats Card — using github-stats-level alternative -->
+<img src="https://github-readme-stats-sigma-five.vercel.app/api?username=FlowThingy&show_icons=true&theme=tokyonight&hide_border=true&title_color=e0222a&icon_color=e0222a&bg_color=0d1117&text_color=c9d1d9" height="160" alt="GitHub Stats" />
 
-<!-- Top Languages Card — Tokyo Night theme -->
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=FlowThingy&layout=compact&theme=tokyonight&hide_border=true&title_color=e0222a&bg_color=0d1117&text_color=c9d1d9" height="160" alt="Top Languages" />
+<!-- Top Languages Card -->
+<img src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=FlowThingy&layout=compact&theme=tokyonight&hide_border=true&title_color=e0222a&bg_color=0d1117&text_color=c9d1d9" height="160" alt="Top Languages" />
 
 </div>
 
