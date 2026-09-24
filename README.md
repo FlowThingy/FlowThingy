@@ -18,8 +18,7 @@
 
 </div>
 
-<!-- Tokyo Night City Banner -->
-<img src="assets/3f8231112980585.601eb97c041dc.gif" width="100%" alt="Tokyo Night City" />
+<img src="assets/tokyo-banner.svg" width="100%" alt="Tokyo Night City" />
 
 ---
 
@@ -27,8 +26,6 @@
 
 Student and creator. I learn by building things — not just following tutorials.  
 I experiment with software ideas, make videos, edit cars, and ship stuff to the internet.
-
-<img src="assets/6600c2f3613c019aea6e2cf1ab22a061.gif" width="80" align="right" alt="pixel car" />
 
 Currently operating under two names:
 - **FlowThingy** — the project/brand. Where experiments go live.
