@@ -11,10 +11,10 @@
   style="border-radius:12px; box-shadow: 0 0 24px #e0222a;" />
 
 <!-- Typing SVG — animated typewriter intro -->
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=22&duration=3000&pause=800&color=E0222A&background=0D1117&center=true&vCenter=true&width=520&lines=FlowThingy+%2F+Kranz;builder.+experimenter.+creator.;software+%7C+video+%7C+web+%7C+ideas)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Courier+Prime&size=22&duration=3000&pause=800&color=E0222A&center=true&vCenter=true&width=520&lines=FlowThingy+%2F+Kranz;builder.+experimenter.+creator.;software+%7C+video+%7C+web+%7C+ideas)](https://git.io/typing-svg)
 
-<!-- Visitor badge — hits.seeyoufarm.com (reliable) -->
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FFlowThingy%2FFlowThingy&count_bg=%23E0222A&title_bg=%230D1117&icon=github&icon_color=%23FFFFFF&title=visitors&edge_flat=true)](https://github.com/FlowThingy/FlowThingy)
+<!-- Visitor badge -->
+![visitors](https://komarev.com/ghpvc/?username=FlowThingy&style=flat-square&color=e0222a&label=visitors)
 
 </div>
 
@@ -146,8 +146,9 @@ Things I've actually used across these projects:
 
 <div align="center">
 
-<!-- Pixel art profile card — tokyonight palette -->
-<img src="https://pixel-profile.vercel.app/api/github-stats?username=FlowThingy&theme=tokyo-night&screen_effect=true" alt="Pixel GitHub Stats" />
+<!-- Stats using self-hosted instance -->
+<img src="https://github-readme-stats-sand-iota-56.vercel.app/api?username=FlowThingy&show_icons=true&theme=tokyonight&hide_border=true&title_color=e0222a&icon_color=e0222a&bg_color=0d1117&text_color=c9d1d9&include_all_commits=true&count_private=true" height="160" alt="GitHub Stats" />
+<img src="https://github-readme-stats-sand-iota-56.vercel.app/api/top-langs/?username=FlowThingy&layout=compact&theme=tokyonight&hide_border=true&title_color=e0222a&bg_color=0d1117&text_color=c9d1d9" height="160" alt="Top Languages" />
 
 </div>
 
