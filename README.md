@@ -146,6 +146,10 @@ Things I've actually used across these projects:
 
 <div align="center">
 
+<img src="assets/tokyo-banner.svg" width="100%" alt="Tokyo Night City" />
+
+<br/>
+
 <img src="https://github-readme-stats-sand-iota-56.vercel.app/api?username=FlowThingy&show_icons=true&theme=tokyonight&hide_border=true&title_color=e0222a&icon_color=e0222a&bg_color=0d1117&text_color=c9d1d9&include_all_commits=true&count_private=true" height="165" alt="GitHub Stats" />
 &nbsp;
 <img src="https://github-readme-stats-sand-iota-56.vercel.app/api/top-langs/?username=FlowThingy&layout=compact&theme=tokyonight&hide_border=true&title_color=e0222a&bg_color=0d1117&text_color=c9d1d9&langs_count=6" height="165" alt="Top Languages" />
