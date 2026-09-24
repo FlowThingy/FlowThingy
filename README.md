@@ -10,11 +10,6 @@
 <img src="assets/logo.png" width="110" alt="FlowThingy logo"
   style="border-radius:12px; box-shadow: 0 0 24px #e0222a;" />
 
-<br/>
-
-<!-- Tokyo Night City Banner -->
-<img src="assets/3f8231112980585.601eb97c041dc.gif" width="860" height="200" alt="Tokyo Night City" />
-
 <!-- Typing SVG — animated typewriter intro -->
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Courier+Prime&size=22&duration=3000&pause=800&color=E0222A&center=true&vCenter=true&width=520&lines=FlowThingy+%2F+Kranz;builder.+experimenter.+creator.;software+%7C+video+%7C+web+%7C+ideas)](https://git.io/typing-svg)
 
@@ -22,6 +17,9 @@
 ![visitors](https://komarev.com/ghpvc/?username=FlowThingy&style=flat-square&color=e0222a&label=visitors)
 
 </div>
+
+<!-- Tokyo Night City Banner -->
+<img src="assets/3f8231112980585.601eb97c041dc.gif" width="100%" alt="Tokyo Night City" />
 
 ---
 
