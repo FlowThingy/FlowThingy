@@ -10,6 +10,11 @@
 <img src="assets/logo.png" width="110" alt="FlowThingy logo"
   style="border-radius:12px; box-shadow: 0 0 24px #e0222a;" />
 
+<br/>
+
+<!-- Tokyo Night City Banner -->
+<img src="assets/6600c2f3613c019aea6e2cf1ab22a061.gif" width="100%" alt="Tokyo Night City" />
+
 <!-- Typing SVG — animated typewriter intro -->
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Courier+Prime&size=22&duration=3000&pause=800&color=E0222A&center=true&vCenter=true&width=520&lines=FlowThingy+%2F+Kranz;builder.+experimenter.+creator.;software+%7C+video+%7C+web+%7C+ideas)](https://git.io/typing-svg)
 
@@ -24,6 +29,8 @@
 
 Student and creator. I learn by building things — not just following tutorials.  
 I experiment with software ideas, make videos, edit cars, and ship stuff to the internet.
+
+<img src="assets/3f8231112980585.601eb97c041dc.gif" width="180" align="right" alt="pixel car" />
 
 Currently operating under two names:
 - **FlowThingy** — the project/brand. Where experiments go live.
@@ -145,8 +152,6 @@ Things I've actually used across these projects:
 ## `> stats`
 
 <div align="center">
-
-<img src="assets/tokyo-banner.svg" width="100%" alt="Tokyo Night City" />
 
 <br/>
 
