@@ -146,6 +146,14 @@ Things I've actually used across these projects:
 
 <div align="center">
 
+<!-- GitHub Stats Card — self-hosted Vercel instance -->
+<img src="https://github-readme-stats-sand-iota-56.vercel.app/api?username=FlowThingy&show_icons=true&theme=tokyonight&hide_border=true&title_color=e0222a&icon_color=e0222a&bg_color=0d1117&text_color=c9d1d9" height="160" alt="GitHub Stats" />
+
+<!-- Top Languages Card — self-hosted Vercel instance -->
+<img src="https://github-readme-stats-sand-iota-56.vercel.app/api/top-langs/?username=FlowThingy&layout=compact&theme=tokyonight&hide_border=true&title_color=e0222a&bg_color=0d1117&text_color=c9d1d9" height="160" alt="Top Languages" />
+
+</div>
+
 <div align="center">
 
 <!-- GitHub Streak Stats -->
